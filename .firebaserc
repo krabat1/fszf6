@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "fszf6-4942a": {
+      "hosting": {
+        "fszf6": [
+          "fszf6-4942a"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "fszf6-4942a"
+  }
+}
