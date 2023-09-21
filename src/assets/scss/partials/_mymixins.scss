@@ -1,25 +1,25 @@
 @use "sass:math";
 
-/* ************************************ */
-/* ***** TOC ************************** */
-/* ************************************ */
-/* ===== MEDIA QUERIES ================ */
-/* ===== RESPONSIVE FONT-SIZE II. ===== */
-/* ===== BOX ========================== */
-/* ===== UNPACK-SHORTHAND ============= */
-/* ===== POSITION ===================== */
-/* ===== FLEX ========================= */
-/* ===== COVER-BACKGROUND ============= */
-/* ===== PSEUDO ======================= */
-/* ===== Z-INDEX ====================== */
-/* ===== FADE ========================= */
+// ************************************ //
+// ***** TOC ************************** //
+// ************************************ //
+// ===== MEDIA QUERIES ================ //
+// ===== RESPONSIVE FONT-SIZE II. ===== //
+// ===== BOX ========================== //
+// ===== UNPACK-SHORTHAND ============= //
+// ===== POSITION ===================== //
+// ===== FLEX ========================= //
+// ===== COVER-BACKGROUND ============= //
+// ===== PSEUDO ======================= //
+// ===== Z-INDEX ====================== //
+// ===== FADE ========================= //
 
 // https://sass-lang.com/documentation/at-rules/import/
 // put it here: src/assets/scss/partials/mymixins.scss
 // @import '../src/assets/scss/patials/_variable.scs';
 // Only Import In style.scss effect all over project
 
-/* ===== MEDIA QUERIES ===== */
+// ===== MEDIA QUERIES ===== //
 
 // 320px 20rem
 // 480px 30rem
@@ -79,7 +79,7 @@
     }
 }
 
-/* ===== Usage ===== */
+// ===== Usage ===== //
 // .stg2 {
 //     @include for-size(max, 12, 'all and') {
 //         color: red;
@@ -91,7 +91,7 @@
 //         color: green;
 //     }
 // }
-/* ===== Result ===== */
+// ===== Result ===== //
 // @media all and (max-width: 192px) {
 //     .stg2 {
 //         color: red;
@@ -108,7 +108,7 @@
 //     }
 // }
 
-/* ===== RESPONSIVE FONT-SIZE II. ===== */
+// ===== RESPONSIVE FONT-SIZE II. ===== //
 
 // REQUIRE: MEDIA QUERIES
 
@@ -132,7 +132,7 @@
     }
 }
 
-/* ===== Usage ===== */
+// ===== Usage ===== //
 // html{
 //     font-size: HTMLrfsFS(12px,16px,480px,768px);
 //     @include for-size(min,64){
@@ -140,7 +140,7 @@
 //         font-size:#{$stop};
 //     }
 // }
-/* ===== Result ===== */
+// ===== Result ===== //
 //   html {
 //     font-size: "calc(5.3333333333px + 1.3888888889vw)";
 //   }
@@ -150,20 +150,20 @@
 //     }
 //   }
 
-/* ===== BOX ===== */
+// ===== BOX ===== //
 @mixin box($width, $height: $width) {
     width: $width;
     height: $height;
 }
 
-/* ===== Usage ===== */
+// ===== Usage ===== //
 // .a{
 //     @include box(200px);
 // }
 // .b{
 //     @include box(200px,300px);
 // }
-/* ===== Result ===== */
+// ===== Result ===== //
 // .a {
 //     width: 200px;
 //     height: 200px;
@@ -173,7 +173,7 @@
 //     height: 300px;
 // }
 
-/* ===== UNPACK-SHORTHAND ===== */
+// ===== UNPACK-SHORTHAND ===== //
 
 // margin, padding, border-width etc...
 @function unpack-shorthand($sh) {
@@ -194,7 +194,7 @@
     }
 }
 
-/* ===== Usage ===== */
+// ===== Usage ===== //
 // .a{
 //     margin: unpack-shorthand(0);
 // }
@@ -207,7 +207,7 @@
 // .d{
 //     margin: unpack-shorthand(10px 20px 30px 40px);
 // }
-/* ===== Result ===== */
+// ===== Result ===== //
 // .a {
 //     margin: 0 0 0 0;
 // }
@@ -221,7 +221,7 @@
 //     margin: 10px 20px 30px 40px;
 // }
 
-/* ===== POSITION ===== */
+// ===== POSITION ===== //
 
 // REQUIRE: UNPACK-SHORTHAND
 
@@ -234,11 +234,11 @@
     left: nth($box-edge-values, 4);
 }
 
-/* ===== Usage ===== */
+// ===== Usage ===== //
 //   div{
 //       @include position(absolute, 20% 10%);
 //   }
-/* ===== Result ===== */
+// ===== Result ===== //
 //   div {
 //     position: absolute;
 //     top: 20%;
@@ -247,7 +247,7 @@
 //     left: 10%;
 //   }
 
-/* ===== FLEX ===== */
+// ===== FLEX ===== //
 
 @mixin flex-column {
     display: flex;
@@ -279,7 +279,7 @@
 // ha a flex-direction megváltozik, akkor felcseréljük
 // a tengelyt, ezért az ellenkezőjét kell használni, így:
 
-/* ===== Usage ===== */
+// ===== Usage ===== //
 //   .vertical-centered-element {
 //     @include flex-center-vert;
 //   }
@@ -287,7 +287,7 @@
 //     flex-direction: column;
 //     @include flex-center-vert;
 //   }
-/* ===== Result ===== */
+// ===== Result ===== //
 //   .vertical-centered-element {
 //     display: flex;
 //     align-items: center;
@@ -298,7 +298,7 @@
 //     align-items: center;
 //   }
 
-/* ===== COVER-BACKGROUND ===== */
+// ===== COVER-BACKGROUND ===== //
 
 @mixin cover-background($bgpos: center) {
     background-repeat: no-repeat;
@@ -306,7 +306,7 @@
     background-position: $bgpos;
 }
 
-/* ===== Usage ===== */
+// ===== Usage ===== //
 //   .a{
 //     height:50vh;
 //     @include cover-background;
@@ -319,7 +319,7 @@
 //      height:50vh;
 //     @include cover-background(0 50%);
 //   }
-/* ===== Result ===== */
+// ===== Result ===== //
 //   .a {
 //     height: 50vh;
 //     background-repeat: no-repeat;
@@ -339,7 +339,7 @@
 //     background-position: 0 50%;
 //   }
 
-/* ===== PSEUDO ===== */
+// ===== PSEUDO ===== //
 
 // REQUIRE: BOX
 
@@ -356,7 +356,7 @@
     @include box($width, $height);
 }
 
-/* ===== Usage ===== */
+// ===== Usage ===== //
 // div {
 //   position: relative;
 //   @include box(200px);
@@ -364,7 +364,7 @@
 //     @include pseudo(100px, 100px);
 //   }
 // }
-/* ===== Result ===== */
+// ===== Result ===== //
 //   div {
 //     position: relative;
 //     width: 200px;
@@ -378,7 +378,7 @@
 //     height: 100px;
 //   }
 
-/* ===== Z-INDEX ===== */
+// ===== Z-INDEX ===== //
 //  - Először is meg kell határoznunk az összes elemet egy tömbben, 
 //  ahol a prioritás jobbra nő
 //  - Másodszor, az index scss built-in modult használjuk 
@@ -390,18 +390,18 @@ $elements: landing, header, modal, very-important-modal;
     z-index: index($elements, $id);
 }
 
-/* ===== Usage ===== */
+// ===== Usage ===== //
 //  .modal{
 //      @include z-index(modal);    // 3
 //  }
 //  https://codepen.io/alemesa/pen/bGdVyEv
-/* ===== Result ===== */
+// ===== Result ===== //
 //  .modal {
 //      z-index: 3;
 //  }
 
 
-/* ===== FADE ===== */
+// ===== FADE ===== //
 
 @mixin fade($type) {
     @if $type=="hide" {
@@ -417,14 +417,14 @@ $elements: landing, header, modal, very-important-modal;
     }
 }
 
-/* ===== Usage ===== */
+// ===== Usage ===== //
 //   div.hide{
 //     @include fade(hide); 
 //   }
 //   div{
 //     @include fade(show); 
 //   }
-/* ===== Result ===== */
+// ===== Result ===== //
 //   div.hide {
 //     visibility: hidden;
 //     opacity: 0;
