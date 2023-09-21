@@ -1,0 +1,438 @@
+@use "sass:math";
+
+/* ************************************ */
+/* ***** TOC ************************** */
+/* ************************************ */
+/* ===== MEDIA QUERIES ================ */
+/* ===== RESPONSIVE FONT-SIZE II. ===== */
+/* ===== BOX ========================== */
+/* ===== UNPACK-SHORTHAND ============= */
+/* ===== POSITION ===================== */
+/* ===== FLEX ========================= */
+/* ===== COVER-BACKGROUND ============= */
+/* ===== PSEUDO ======================= */
+/* ===== Z-INDEX ====================== */
+/* ===== FADE ========================= */
+
+// https://sass-lang.com/documentation/at-rules/import/
+// put it here: src/assets/scss/partials/mymixins.scss
+// @import '../src/assets/scss/patials/_variable.scs';
+// Only Import In style.scss effect all over project
+
+/* ===== MEDIA QUERIES ===== */
+
+// 320px 20rem
+// 480px 30rem
+// 640px 40rem
+// 768px 48rem
+// 800px 50rem
+// 960px 60rem
+// 1024px 64rem
+// 1280px 80rem
+// 1360px 85rem
+// 1440px 90rem
+// 1536px 96rem
+// 1920px 120rem
+// 2046px 128rem
+// 2160px 135rem
+// 2560px 160rem
+// 2960px 185rem
+// 3040px 190rem 
+// https://mediag.com/wp-content/uploads/2018/03/MG_Popular_Screen_Resolutions_PDF.pdf
+
+//   @media not|only mediatype and (expressions) {
+//     CSS-Code;
+//   }
+
+@mixin for-size($a, $b, $c: '') {
+    $expr: '';
+    $mtype: '';
+
+    @if ($c) {
+        $mtype: $c;
+    }
+
+    @if(($a ==min) or ($a ==max)) {
+        @if(type-of($b)=='number') {
+            $expr: $expr + " (" + $a + "-width:"$b*16px + ")";
+        }
+    }
+
+    @else if(type-of($a)=='number'
+        and type-of($b)=='number'
+
+    ) {
+        @if($a < $b ) {
+            $expr: $expr + ' (min-width: ' + $a*16px;
+            $expr: $expr + ') and (max-width:' + $b*16px + ")";
+        }
+
+        @else {
+            @debug "min>max";
+        }
+    }
+
+    $mtypeexpr: #{$mtype} #{$expr};
+
+    @media #{$mtypeexpr} {
+        @content;
+    }
+}
+
+/* ===== Usage ===== */
+// .stg2 {
+//     @include for-size(max, 12, 'all and') {
+//         color: red;
+//     }
+//     @include for-size(min, 10, 'screen and') {
+//         color: blue;
+//     }
+//     @include for-size(8, 10, 'screen and') {
+//         color: green;
+//     }
+// }
+/* ===== Result ===== */
+// @media all and (max-width: 192px) {
+//     .stg2 {
+//         color: red;
+//     }
+// }
+// @media screen and (min-width: 160px) {
+//     .stg2 {
+//         color: blue;
+//     }
+// }
+// @media screen and (min-width: 128px) and (max-width:160px) {
+//     .stg2 {
+//         color: green;
+//     }
+// }
+
+/* ===== RESPONSIVE FONT-SIZE II. ===== */
+
+// REQUIRE: MEDIA QUERIES
+
+//what should be the basic font size to have X px on Y width (with rfs)
+
+@function HTMLrfsFS($fs_on_a_width, $fs_on_b_width, $a_width, $b_width, $stop_width: 0px) {
+    $width_diff: $b_width - $a_width;
+    $size_diff: $fs_on_b_width - $fs_on_a_width;
+    $size_change_per_px: math.div($size_diff, $width_diff);
+    $start_fs: (
+        $fs_on_a_width - ($a_width * $size_change_per_px)
+    );
+
+    @if($stop_width==0px) {
+        $calc: 'calc(' + $start_fs + ' + ' + $size_change_per_px * 100 + 'vw)';
+        @return unquote($calc);
+    }
+
+    @else {
+        @return ($stop_width*$size_change_per_px)+$start_fs;
+    }
+}
+
+/* ===== Usage ===== */
+// html{
+//     font-size: HTMLrfsFS(12px,16px,480px,768px);
+//     @include for-size(min,64){
+//         $stop:HTMLrfsFS(12px,16px,480px,768px,1024px);
+//         font-size:#{$stop};
+//     }
+// }
+/* ===== Result ===== */
+//   html {
+//     font-size: "calc(5.3333333333px + 1.3888888889vw)";
+//   }
+//   @media (min-width: 1024px) {
+//     html {
+//       font-size: 19.5555555556px;
+//     }
+//   }
+
+/* ===== BOX ===== */
+@mixin box($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+/* ===== Usage ===== */
+// .a{
+//     @include box(200px);
+// }
+// .b{
+//     @include box(200px,300px);
+// }
+/* ===== Result ===== */
+// .a {
+//     width: 200px;
+//     height: 200px;
+// }
+// .b {
+//     width: 200px;
+//     height: 300px;
+// }
+
+/* ===== UNPACK-SHORTHAND ===== */
+
+// margin, padding, border-width etc...
+@function unpack-shorthand($sh) {
+    @if length($sh)==1 {
+        @return nth($sh, 1) nth($sh, 1) nth($sh, 1) nth($sh, 1);
+    }
+
+    @else if length($sh)==2 {
+        @return nth($sh, 1) nth($sh, 2) nth($sh, 1) nth($sh, 2);
+    }
+
+    @else if length($sh)==3 {
+        @return nth($sh, 1) nth($sh, 2) nth($sh, 3) nth($sh, 2);
+    }
+
+    @else {
+        @return $sh;
+    }
+}
+
+/* ===== Usage ===== */
+// .a{
+//     margin: unpack-shorthand(0);
+// }
+// .b{
+//     margin: unpack-shorthand(0 auto);
+// }
+// .c{
+//     margin: unpack-shorthand(0 auto 10px);
+// }
+// .d{
+//     margin: unpack-shorthand(10px 20px 30px 40px);
+// }
+/* ===== Result ===== */
+// .a {
+//     margin: 0 0 0 0;
+// }
+// .b {
+//     margin: 0 auto 0 auto;
+// }
+// .c {
+//     margin: 0 auto 10px auto;
+// }
+// .d {
+//     margin: 10px 20px 30px 40px;
+// }
+
+/* ===== POSITION ===== */
+
+// REQUIRE: UNPACK-SHORTHAND
+
+@mixin position($position, $box-edge-values) {
+    position: $position;
+    $box-edge-values: unpack-shorthand($box-edge-values);
+    top: nth($box-edge-values, 1);
+    right: nth($box-edge-values, 2);
+    bottom: nth($box-edge-values, 3);
+    left: nth($box-edge-values, 4);
+}
+
+/* ===== Usage ===== */
+//   div{
+//       @include position(absolute, 20% 10%);
+//   }
+/* ===== Result ===== */
+//   div {
+//     position: absolute;
+//     top: 20%;
+//     right: 10%;
+//     bottom: 20%;
+//     left: 10%;
+//   }
+
+/* ===== FLEX ===== */
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-center-column {
+    @include flex-center;
+    flex-direction: column;
+}
+
+@mixin flex-center-vert {
+    display: flex;
+    align-items: center;
+}
+
+@mixin flex-center-horiz {
+    display: flex;
+    justify-content: center;
+}
+
+// Mivel a flexbox axis- és bázisrendszerként működik, 
+// ha a flex-direction megváltozik, akkor felcseréljük
+// a tengelyt, ezért az ellenkezőjét kell használni, így:
+
+/* ===== Usage ===== */
+//   .vertical-centered-element {
+//     @include flex-center-vert;
+//   }
+//   .horizontally-centered-element {
+//     flex-direction: column;
+//     @include flex-center-vert;
+//   }
+/* ===== Result ===== */
+//   .vertical-centered-element {
+//     display: flex;
+//     align-items: center;
+//   }
+//   .horizontally-centered-element {
+//     flex-direction: column;
+//     display: flex;
+//     align-items: center;
+//   }
+
+/* ===== COVER-BACKGROUND ===== */
+
+@mixin cover-background($bgpos: center) {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: $bgpos;
+}
+
+/* ===== Usage ===== */
+//   .a{
+//     height:50vh;
+//     @include cover-background;
+//   }
+//   .b{
+//     height:50vh;
+//     @include cover-background(top);  
+//   }
+//   .c{
+//      height:50vh;
+//     @include cover-background(0 50%);
+//   }
+/* ===== Result ===== */
+//   .a {
+//     height: 50vh;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     background-position: center;
+//   }
+//   .b {
+//     height: 50vh;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     background-position: top;
+//   }
+//   .c {
+//     height: 50vh;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     background-position: 0 50%;
+//   }
+
+/* ===== PSEUDO ===== */
+
+// REQUIRE: BOX
+
+@mixin pseudo($width: 100%,
+    $height: 100%,
+    $display: inline-block,
+    $pos: absolute,
+    $content: ""
+
+) {
+    content: $content;
+    display: $display;
+    position: $pos;
+    @include box($width, $height);
+}
+
+/* ===== Usage ===== */
+// div {
+//   position: relative;
+//   @include box(200px);
+//   &:after {
+//     @include pseudo(100px, 100px);
+//   }
+// }
+/* ===== Result ===== */
+//   div {
+//     position: relative;
+//     width: 200px;
+//     height: 200px;
+//   }
+//   div:after {
+//     content: "";
+//     display: inline-block;
+//     position: absolute;
+//     width: 100px;
+//     height: 100px;
+//   }
+
+/* ===== Z-INDEX ===== */
+//  - Először is meg kell határoznunk az összes elemet egy tömbben, 
+//  ahol a prioritás jobbra nő
+//  - Másodszor, az index scss built-in modult használjuk 
+//  a tömb indexének megkeresésére.
+
+$elements: landing, header, modal, very-important-modal;
+
+@mixin z-index($id) {
+    z-index: index($elements, $id);
+}
+
+/* ===== Usage ===== */
+//  .modal{
+//      @include z-index(modal);    // 3
+//  }
+//  https://codepen.io/alemesa/pen/bGdVyEv
+/* ===== Result ===== */
+//  .modal {
+//      z-index: 3;
+//  }
+
+
+/* ===== FADE ===== */
+
+@mixin fade($type) {
+    @if $type=="hide" {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 1s, opacity 1s;
+    }
+
+    @else if $type=="show" {
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 1s, opacity 1s;
+    }
+}
+
+/* ===== Usage ===== */
+//   div.hide{
+//     @include fade(hide); 
+//   }
+//   div{
+//     @include fade(show); 
+//   }
+/* ===== Result ===== */
+//   div.hide {
+//     visibility: hidden;
+//     opacity: 0;
+//     transition: visibility 1s, opacity 1s;
+//   }
+
+//   div {
+//     visibility: visible;
+//     opacity: 1;
+//     transition: visibility 1s, opacity 1s;
+//   }
