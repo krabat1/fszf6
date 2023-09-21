@@ -9,16 +9,23 @@
     -moz-osx-font-smoothing: grayscale;
   }
 </style>
-<div class="container-fluid">
+<div class="container-fluid px-0 bg-light vh-100">
   <div class="col-12">
-    <div class="container">
+    <div class="container-lg px-0 bg-light-subtle d-flex flex-column justify-items-end vh-100">
       <header>
-        title
+        <nav class="navbar border-bottom border-light border-4">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+              <h1 class="d-inline h4 ps-3">Title</h1>
+            </a>
+          </div>
+        </nav>
       </header>
-      <main>
+      <main class="p-4 flex-grow-1">
         <router-outlet></router-outlet>
       </main>
-      <footer class="text-center p-4">
+      <footer class="text-center p-4 border-top border-light border-4">
         Created by:
       </footer>
     </div>
