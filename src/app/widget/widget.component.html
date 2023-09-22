@@ -1,0 +1,15 @@
+<div [ngSwitch]="book">
+    <div *ngSwitchCase="'gyu_i'">
+      <h3>{{this.data.gyu_i.name}}</h3>
+      <p [class.akcio]="this.data.gyu_i.akcio">{{this.data.gyu_i.ar}}</p>
+    </div>
+    <div *ngSwitchCase="'gyu_ii'">
+      <h3>{{this.data.gyu_ii.name}}</h3> 
+      <p [class.akcio]="this.data.gyu_ii.akcio">{{this.data.gyu_ii.ar}}</p> 
+    </div>
+      <div *ngSwitchCase="'gyu_iii'">
+        <h3>{{this.data.gyu_iii.name}}</h3> 
+        <p [class.akcio]="this.data.gyu_iii.akcio">{{this.data.gyu_iii.ar}}</p> 
+    </div>
+    <div *ngSwitchDefault>Otherwise</div>
+  </div>
