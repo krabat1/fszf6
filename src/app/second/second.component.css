@@ -1,0 +1,18 @@
+.cards {
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 576px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 992px) {
+  .cards {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+textarea {
+  min-height: 2rem;
+}/*# sourceMappingURL=second.component.css.map */

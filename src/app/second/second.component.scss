@@ -1,0 +1,17 @@
+@import '../../assets/scss/partials/_mymixins.scss';
+.cards{
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    @include for-size(min,36){
+        grid-template-columns: 1fr 1fr;
+    } 
+    @include for-size(min,48){
+        //grid-template-columns: 1fr 1fr 1fr;
+    } 
+    @include for-size(min,62){
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+textarea{
+    min-height: 2rem;
+}
