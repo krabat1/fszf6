@@ -9,6 +9,8 @@ import { ThirdComponent } from './third/third.component';
 import { FourthComponent } from './fourth/fourth.component';
 import { FifthComponent } from './fifth/fifth.component';
 import { WidgetComponent } from './widget/widget.component';
+import { AddnewComponent } from './addnew/addnew.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import { WidgetComponent } from './widget/widget.component';
     ThirdComponent,
     FourthComponent,
     FifthComponent,
-    WidgetComponent
+    WidgetComponent,
+    AddnewComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
