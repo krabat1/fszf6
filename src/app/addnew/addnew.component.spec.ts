@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AddnewComponent } from './addnew.component';
 
 describe('AddnewComponent', () => {
@@ -15,7 +14,12 @@ describe('AddnewComponent', () => {
     fixture.detectChanges();
   });
 
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
+  /*fit('should be the only test that runs', () => {
+    // Tesztkód
+  });*/
 });

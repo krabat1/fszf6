@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WidgetComponent } from '../widget/widget.component';
 
 @Component({
   selector: 'app-third',
