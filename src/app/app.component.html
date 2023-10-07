@@ -1,4 +1,3 @@
-
 <style>
   :host {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -33,7 +32,7 @@
           </div>
         </nav>
       </header>
-        <div *ngIf="this.route == '/showroom' || this.route == '/showroom/sci-fi' || this.route == '/showroom/funny'; then thenBlock else elseBlock"></div>
+      <div *ngIf="this.route == '/showroom' || this.route == '/showroom/sci-fi' || this.route == '/showroom/funny'; then thenBlock else elseBlock"></div>
         <ng-template #thenBlock>
           <ul class="nav nav-pills nav-fill border-bottom border-light border-4 py-3">
             <li class="nav-item">

@@ -17,6 +17,18 @@ export class AddnewComponent implements OnInit {
     this.import();
   }
 
+  onTitleChange(newTitle: string) {
+    //console.log('event fired - onTitleChange');
+    if (newTitle.length === 1 && newTitle === '\b') {
+      this.actualBook.setTitle('');
+      console.log('empty title B - never seen this');
+    }else {
+      this.actualBook.setTitle(newTitle);
+      //console.log('it works always, on the last character too');
+      //console.log(this.actualBook.getTitle().length +' '+this.actualBook.getTitle());
+    }
+  }
+
   onInput(event: Event) {
     //console.log('event fired - onInput');
     const inputElement = event.target as HTMLInputElement;
@@ -24,27 +36,21 @@ export class AddnewComponent implements OnInit {
 
     if (inputValue.length === 1 && inputValue === '\b') {
       this.actualBook.setTitle('');
-      console.log('empty title - never seen this');
+      console.log('empty title A - never seen this');
     }
+    console.log('Title changed')
+    console.log(this.actualBook)
   }
 
-  onTitleChange(newTitle: string) {
-    //console.log('event fired - onTitleChange');
-    if (newTitle.length === 1 && newTitle === '\b') {
-      this.actualBook.setTitle('');
-      console.log('empty title - never seen this');
-    } else {
-      this.actualBook.setTitle(newTitle);
-      //console.log('it works always, on the last character too');
-      //console.log(this.actualBook.getTitle().length +' '+this.actualBook.getTitle());
-    }
-  }
 
-  preSave(e:Event){ /* ngmodelchange issue */
+
+  isbnTrigger(e:Event){ /* ngmodelchange issue */
     /*this.actualBook.setTitle(this.actualBook.getTitle()+' ');
     this.actualBook.setTitle(this.actualBook.getTitle().trim());*/
     this.actualBook.setIsbn(this.actualBook.getIsbn()+' ');
     this.actualBook.setIsbn(this.actualBook.getIsbn().trim());
+    console.log('ISBN changed')
+    console.log(this.actualBook)
   }
 
   save(){
@@ -78,8 +84,9 @@ export class AddnewComponent implements OnInit {
     });
 
     if( this.books == null || this.books.length == 0 ){
-      console.log('Nincs betöltendő feladat.');
+      console.log('No books in LocalStorage.');
     }else{
+      console.log('Books from LocalStorage:');
       console.log(this.books);
     }
   }

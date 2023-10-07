@@ -3,11 +3,11 @@
         <div class="row mx-0">
             <h3>Add new book</h3>
             <!--input #titleinp type="text"  class="col-12 p-2 mb-3 rounded border-1" placeholder="Title"
-                (ngModelChange)="this.actualBook.setTitle(titleinp.value);preSave($event)" [ngModel]="this.actualBook.getTitle()" [ngModelOptions]="{standalone: true}" (input)="onInput($event)"-->
+                (ngModelChange)="this.actualBook.setTitle(titleinp.value);isbnTrigger($event)" [ngModel]="this.actualBook.getTitle()" [ngModelOptions]="{standalone: true}" (input)="onInput($event)"-->
             <input #titleinp type="text"  class="col-12 p-2 mb-3 rounded border-1" placeholder="Title"
             (ngModelChange)="onTitleChange($event)" [ngModel]="this.actualBook.getTitle()" [ngModelOptions]="{standalone: true}" (input)="onInput($event)">
             <input #isbninp type="text" class="col-12 p-2 mb-3 rounded border-1" placeholder="ISBN"
-            (ngModelChange)="this.actualBook.setIsbn(isbninp.value);preSave($event)" [ngModel]="this.actualBook.getIsbn()" [ngModelOptions]="{standalone: true}">
+            (ngModelChange)="this.actualBook.setIsbn(isbninp.value);isbnTrigger($event)" [ngModel]="this.actualBook.getIsbn()" [ngModelOptions]="{standalone: true}">
             <button type="submit" class="col-4 offset-8 btn btn-primary"(click)="this.save()">Save</button>
         </div>
     </form>

@@ -30,30 +30,33 @@ export class Book {
             //throw new Error('Title must be string -> ' + value);
             this.setError('title','Title must be string -> ' + value);
         }else if(value.trim().length == 0){
-            this.setError('title','Title must be a least one letter -> ' + this.getTitle().length);
+            this.setError('title','Title must be a least one letter! Length: ' + this.getTitle().trim().length + ' Current: ' + this.getTitle());
+            this.title = ''; // akkor tényleg legyen 0
         }else{
             this.setError('title','');
             this.title = value.trim();
         }
-        //console.log(this.getTitle().length +' '+this.getTitle());
+        //console.log({title:this.getTitle(),isbn:this.getIsbn(),errors:{title:this.getErrors('title'),isbn:this.getErrors('isbn')}})
     }
 
-    getStringDigits(str: string){
+    public getStringDigits(str: string){
         str = str.replace(/([^(0-9]+)/g, '');
         return str;
     }
 
     setIsbn(value: string): void {
-        let testisbn = this.getStringDigits(this.getIsbn());
-        if(testisbn.length != 10 && testisbn.length != 13){
-            this.isbn = value.trim();
-            //throw new Error('isbn must contain 10 or 13 digit -> ' + testisbn);
-            this.setError('isbn','ISBN must contain 10 or 13 digit! Digits: ' + testisbn.length +' Current: '+this.getIsbn());
-        }else{
-            this.setError('isbn','');
-            this.isbn = value.trim();
+        if(this.getIsbn() != value || this.getIsbn() == ''){
+            let testisbn = this.getStringDigits(value);
+            if(testisbn.length !== 10 && testisbn.length !== 13){
+                this.isbn = value.trim();
+                //throw new Error('isbn must contain 10 or 13 digit -> ' + testisbn);
+                this.setError('isbn','ISBN must contain 10 or 13 digit! Digits: ' + testisbn.length +' Current: '+this.getIsbn());
+            }else{
+                this.setError('isbn','');
+                this.isbn = value.trim();
+            }
+            //console.log(this.getStringDigits(this.getIsbn()).length);
         }
-        //console.log(this.getStringDigits(this.getIsbn()).length);
     }
 
     setError(key: string, value: string): void {
@@ -64,7 +67,7 @@ export class Book {
         this.errors[key] = '';
     }
 
-    getErrors() {
-        return this.errors;
+    getErrors(key: string) {
+        return this.errors[key];
     }
 }
