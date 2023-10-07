@@ -1,2 +1,6 @@
 // You can add global styles to this file, and also import other style files */
 @import 'assets/scss/partials/_mymixins.scss';
+body > app-root > .container-fluid,
+body > app-root > .container-fluid > .col-12 > .container-lg{
+    min-height: 100vh;
+}

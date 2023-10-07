@@ -92,10 +92,17 @@ export class AddnewComponent implements OnInit {
   }
 
   export(){
-    // reset books
-    // this.books = new Array<Book>();
-    console.log('A feladatok tömbjét eltároljuk a localStorage-ba.')
+    console.log('Book stored in localStorage.')
     localStorage.setItem('books', JSON.stringify(this.books));
     this.import();
   }
+
+  reset(){
+    // reset books
+    this.books = new Array<Book>();
+    console.log('Empty array stored in localStorage.')
+    localStorage.setItem('books', JSON.stringify(this.books));
+    this.import();
+  }
+
 }

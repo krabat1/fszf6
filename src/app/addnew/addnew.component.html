@@ -18,17 +18,24 @@
         <li *ngIf = "this.actualBook.errors['isbn'] != ''">{{this.actualBook.errors['isbn']}}</li>
     </ul>
 </div>
-<table class="table table-striped">
+<table class="table table-striped" *ngIf = "this.books.length > 0">
     <thead>
         <tr>
             <th scope="row">Title</th>
             <th scope="row">ISBN</th>
-            <th scope="row">class</th>
+            <!--th scope="row">class</!--th-->
         </tr>
     </thead>
     <tbody>
         <tr *ngFor = "let bookx of books">  
-            <td>{{ bookx.getTitle() }}</td><td>{{ bookx.getIsbn() }}</td><td>{{ bookx.constructor.name }}</td>
+            <td>{{ bookx.getTitle() }}</td><td>{{ bookx.getIsbn() }}</td><!--td>{{ bookx.constructor.name }}</!--td-->
+        </tr>
+        <tr>
+            <td colspan="2" class="p-0">
+                <div class="row mx-0 bg-white p-2">
+                    <button type="submit" class="col-4 offset-8 btn btn-primary"(click)="this.reset()">Reset Books</button>
+                </div>
+            </td>
         </tr>
     </tbody>
 </table>

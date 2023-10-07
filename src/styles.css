@@ -1,1 +1,4 @@
-/*# sourceMappingURL=styles.css.map */
+body > app-root > .container-fluid,
+body > app-root > .container-fluid > .col-12 > .container-lg {
+  min-height: 100vh;
+}/*# sourceMappingURL=styles.css.map */
