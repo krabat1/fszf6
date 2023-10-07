@@ -2,3 +2,21 @@ $kiemeles: red;
 .akcio {
   color: $kiemeles;
 }
+fieldset{
+  border-style: double !important;
+}
+legend{
+  display: block;
+  padding-inline-start: .3rem;
+  padding-inline-end: .3rem;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  float: none;
+    width: initial;
+    /*padding: 0;*/
+    margin-bottom: 0.5rem;
+    font-size: initial;
+    line-height: inherit;
+}
