@@ -25,3 +25,28 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+vscode open folder
+git init
+ng new beginApp --routing
+!!! SCSS
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin <address>
+git push -u origin main
+
+cd beginApp
+npm i bootstrap
+
+npm install -g firebase-tools
+firebase login
+ng add @angular/fire
+
+firebase experiments:enable webframeworks
+ha nincs engedélyezve
+
+cd beginApp
+ng build
+!!!port 4200 (launch.json)
+npm start (ng serve)
